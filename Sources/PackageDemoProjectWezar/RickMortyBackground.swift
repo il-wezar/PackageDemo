@@ -23,7 +23,7 @@ public struct RickMortyBackgorund {
     
     public func RickMortyBackground(view: UIView, styleOfBlure: styleOfBlure ) {
         
-        let image = UIImage(named: "RickMorty.jpg")
+        let image = UIImage(named: "RickMorty")
         
         var imageView : UIImageView!
         imageView = UIImageView(frame: view.bounds)
