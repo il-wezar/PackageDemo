@@ -23,20 +23,24 @@ public struct RickMortyBackgorund {
     
     public func RickMortyBackground(view: UIView, styleOfBlure: styleOfBlure ) {
         
-        let image = UIImage(named: "RickMorty")
+//        let image = UIImage(named: "RickMorty"
+    
+        let url = URL(string: "https://globalnews.ca/wp-content/uploads/2022/09/MicrosoftTeams-image-16.jpg?w=2048")
         
-        var imageView : UIImageView!
-        imageView = UIImageView(frame: view.bounds)
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = image
-        imageView.center = view.center
-        view.addSubview(imageView)
-        view.sendSubviewToBack(imageView)
-
-        let backgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style(rawValue: styleOfBlure.rawValue) ?? .regular))
-        backgroundBlurView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
-        view.addSubview(backgroundBlurView)
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                let image = UIImage(data: data!)
+                let backgroundImageView = UIImageView(frame: view.bounds)
+                backgroundImageView.contentMode = .scaleAspectFill
+                backgroundImageView.image = image!
+                backgroundImageView.clipsToBounds = true
+                view.addSubview(backgroundImageView)
+                let backgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style(rawValue: styleOfBlure.rawValue) ?? .regular))
+                backgroundBlurView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+                view.addSubview(backgroundBlurView)
+            }
+        }
         
     }
 }
